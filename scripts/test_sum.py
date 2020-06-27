@@ -21,7 +21,7 @@ def sum_data():
 
 class TestSum:
 
-    @allure.severity(allure.severity_level.BLOCKER)     # 最重要的用例
+    @allure.severity(allure.severity_level.BLOCKER)     # 最重要的用
     @allure.step("测试步骤a+b = c")
     @pytest.mark.parametrize("a, b, c", sum_data())
     def test_sum_001(self, a, b, c):
