@@ -1,6 +1,18 @@
 import pytest, time
+
+from Base.getData import GetData
 from Base.page import Page
 from Base.driver import Driver
+
+
+def search_data():
+    # 定义空列表
+    search_list = []
+    data = GetData.get_yaml_data("data_search.yml")
+    for i in data.values():
+        #添加元祖数据到列表
+        search_list.append((i.get("search_data"), i.get("exp_data")))
+    return search_list
 
 
 class TestSearch:
@@ -19,7 +31,7 @@ class TestSearch:
         """点击搜索按钮 并且 点击一次"""
         Page.get_settingPage().click_search_btn()
 
-    @pytest.mark.parametrize("search_data, exp_data", [("1", "休眠"), ("i", "IP地址"), ("m", "MAC地址")])
+    @pytest.mark.parametrize("search_data, exp_data", search_data())
     def test_search_text(self, search_data, exp_data):
         """
         搜索测试方法
